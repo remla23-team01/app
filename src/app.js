@@ -13,11 +13,13 @@ window.addEventListener('load', function () {
                 msg: text,
             }),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json"
             }
         })
             .then((response) => {
-                document.getElementById('output').innerText = response.json().predicted_class;
+                // TODO: remove log and uncomment line after.
+                console.log('response', response);
+                // document.getElementById('output').innerText = response.json().predicted_class;
             });
     });
 });
