@@ -1,0 +1,19 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build-js": "browserify ./src/app.js -o ./public/bundle.js",
+    "watch-js": "watchify ./src/app.js -o ./public/bundle.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@remla23-team01/lib": "^1.0.7",
+    "browserify": "^17.0.0",
+    "rxjs": "^7.8.1",
+    "watchify": "^4.0.0"
+  }
+}
