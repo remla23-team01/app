@@ -16,10 +16,9 @@ window.addEventListener('load', function () {
                 "Content-type": "application/json"
             }
         })
-            .then((response) => {
-                // TODO: remove log and uncomment line after.
-                console.log('response', response);
-                // document.getElementById('output').innerText = response.json().predicted_class;
+            .then((response) => response.json())
+            .then((json) => {
+                document.getElementById('output').innerText = json.predicted_class ? ':)' : ':(';
             });
     });
 });
