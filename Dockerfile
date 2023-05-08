@@ -8,4 +8,4 @@ COPY package.json /root
 RUN ls
 RUN npm install
 RUN npm run build-js
-COPY public /usr/share/nginx/html
+RUN mv public/* /usr/share/nginx/html
