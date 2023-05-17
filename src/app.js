@@ -26,8 +26,8 @@ window.addEventListener('load', function () {
 
 function setSentimentCheckListeners(predicted_class) {
     document.getElementById('sentimentCheck').hidden = false 
-    document.getElementById('isCorrect').addEventListener('click', sendSentimentCheck(predicted_class, true))
-    document.getElementById('notCorrect').addEventListener('click', sendSentimentCheck(predicted_class, false))
+    document.getElementById('isCorrect').addEventListener('click', function () { sendSentimentCheck(predicted_class, true)})
+    document.getElementById('notCorrect').addEventListener('click',  function () {sendSentimentCheck(predicted_class, false)})
 }
 
 function sendSentimentCheck(predicted_class, correct) {
@@ -41,5 +41,7 @@ function sendSentimentCheck(predicted_class, correct) {
             "Content-type": "application/json"
         }
     })
+    document.getElementById('sentimentCheck').hidden = true 
+    document.getElementById('feedback').hidden = false 
 }
 
