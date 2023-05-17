@@ -7,7 +7,7 @@ window.addEventListener('load', function () {
     document.getElementById('predictSentimentBtn').addEventListener('click', function () {
         const text = document.getElementById('predictSentimentText').value;
 
-        fetch('http://127.0.0.1:8080', {
+        fetch('/api', {
             method: "POST",
             body: JSON.stringify({
                 msg: text,
