@@ -7,7 +7,7 @@ window.addEventListener('load', function () {
     document.getElementById('predictSentimentBtn').addEventListener('click', function () {
         const text = document.getElementById('predictSentimentText').value;
 
-        fetch('http://localhost:8080', {
+        fetch('/api', {
             method: "POST",
             body: JSON.stringify({
                 msg: text,
@@ -31,7 +31,7 @@ function setSentimentCheckListeners(predicted_class) {
 }
 
 function sendSentimentCheck(predicted_class, correct) {
-    fetch('http://127.0.0.1:8080/checkPrediction', {
+    fetch('/api/checkPrediction', {
         method: "POST",
         body: JSON.stringify({
             predicted_class: predicted_class,
