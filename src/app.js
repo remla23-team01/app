@@ -19,7 +19,29 @@ window.addEventListener('load', function () {
             .then((response) => response.json())
             .then((json) => {
                 document.getElementById('output').innerText = json.predicted_class ? ':)' : ':(';
+                setSentimentCheckListeners(json.predicted_class)
             });
     });
 });
+
+function setSentimentCheckListeners(predicted_class) {
+    document.getElementById('sentimentCheck').hidden = false 
+    document.getElementById('isCorrect').addEventListener('click', function () { sendSentimentCheck(predicted_class, true)})
+    document.getElementById('notCorrect').addEventListener('click',  function () {sendSentimentCheck(predicted_class, false)})
+}
+
+function sendSentimentCheck(predicted_class, correct) {
+    fetch('/api/checkPrediction', {
+        method: "POST",
+        body: JSON.stringify({
+            predicted_class: predicted_class,
+            prediction_correct: correct
+        }),
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    document.getElementById('sentimentCheck').hidden = true 
+    document.getElementById('feedback').hidden = false 
+}
 
