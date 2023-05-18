@@ -1,5 +1,6 @@
 FROM nginx
 WORKDIR /root
+ENV HOST_URL = "http://localhost:8080"
 RUN apt update
 RUN apt -y install nodejs npm
 COPY ./public /root/public
