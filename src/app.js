@@ -37,7 +37,7 @@ function setSentimentCheckListeners(predicted_class) {
 }
 
 function sendSentimentCheck(predicted_class, correct) {
-    fetch('/api/checkPrediction', {
+    fetch(process.env.MY_APP_CHECK_PREDICTION, {
         method: "POST",
         body: JSON.stringify({
             predicted_class: predicted_class,
