@@ -1,0 +1,9 @@
+services:
+  model-service:
+    image: model-service-test
+    ports:
+      - 8080:8080
+  app:
+    image: app-test
+    ports:
+      - 8081:80
