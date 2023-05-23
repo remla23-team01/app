@@ -27,24 +27,35 @@ window.addEventListener('load', function () {
             .then((response) => response.json())
             .then((json) => {
                 document.getElementById('output').innerText = json.predicted_class ? ':)' : ':(';
-                setSentimentCheckListeners(json.predicted_class)
+                setSentimentCheckListeners(json.review)
             });
     });
 
     this.document.getElementById('allReviews')
 });
 
-function setSentimentCheckListeners(predicted_class) {
+function setSentimentCheckListeners(review) {
     document.getElementById('sentimentCheck').hidden = false 
-    document.getElementById('isCorrect').addEventListener('click', function () { sendSentimentCheck(predicted_class, true)})
-    document.getElementById('notCorrect').addEventListener('click',  function () {sendSentimentCheck(predicted_class, false)})
+
+    // Remove old event listeners
+    var correctButton = document.getElementById('isCorrect')
+    var newCorrectButton = correctButton.cloneNode(true)
+    correctButton.parentNode.replaceChild(newCorrectButton, correctButton)
+
+    var notCorrectButton = document.getElementById('notCorrect')
+    var newNotCorrectButton = notCorrectButton.cloneNode(true)
+    notCorrectButton.parentNode.replaceChild(newNotCorrectButton, notCorrectButton)
+
+
+    document.getElementById('isCorrect').addEventListener('click', function () { sendSentimentCheck(review.id, true)})
+    document.getElementById('notCorrect').addEventListener('click',  function () { sendSentimentCheck(review.id, false)})
 }
 
-function sendSentimentCheck(predicted_class, correct) {
+function sendSentimentCheck(reviewId, correct) {
     fetch(process.env.MY_APP_CHECK_PREDICTION, {
         method: "POST",
         body: JSON.stringify({
-            predicted_class: predicted_class,
+            reviewId: reviewId,
             prediction_correct: correct
         }),
         headers: {
