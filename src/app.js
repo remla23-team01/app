@@ -9,6 +9,8 @@ Object.keys(env_vars).forEach(function(k) {
 
 window.addEventListener('load', function () {
     console.log(process.env.MY_APP_URL);
+    getAllReviews()
+
 
     document.getElementById('predictSentimentBtn').addEventListener('click', function () {
         const text = document.getElementById('predictSentimentText').value;
@@ -16,7 +18,7 @@ window.addEventListener('load', function () {
         fetch(process.env.MY_APP_URL, {
             method: "POST",
             body: JSON.stringify({
-                msg: text,
+                review: text,
             }),
             headers: {
                 "Content-type": "application/json"
@@ -28,6 +30,8 @@ window.addEventListener('load', function () {
                 setSentimentCheckListeners(json.predicted_class)
             });
     });
+
+    this.document.getElementById('allReviews')
 });
 
 function setSentimentCheckListeners(predicted_class) {
@@ -51,3 +55,21 @@ function sendSentimentCheck(predicted_class, correct) {
     document.getElementById('feedback').hidden = false 
 }
 
+async function getAllReviews() {
+    fetch(process.env.MY_APP_All_REVIEWS, {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+        .then((response) => response.json())
+        .then((json) => {
+
+            let reviews = json.reviews
+            let reviewsDiv = document.getElementById('allReviews')
+
+            reviews.forEach(review => {
+               reviewsDiv.innerHTML += "<p>" + review + "</p>" 
+            });
+        });
+}
