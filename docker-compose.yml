@@ -1,0 +1,10 @@
+services:
+  app:
+    image: apptest
+    environment:
+      - BACKEND_URL=http://model-service-serv:8080
+      - PREDICT_PATH=/predict
+      - METRICS_PATH=/metrics
+      - CHECK_PREDICT_PATH=/checkPrediction
+    ports:
+      - 8080:80

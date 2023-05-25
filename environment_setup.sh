@@ -1,0 +1,2 @@
+echo "{\"PREDICT_PATH\":\"$PREDICT_PATH\", \"CHECK_PREDICT_PATH\":\"$CHECK_PREDICT_PATH\", \"BACKEND_URL\":\"$BACKEND_URL\", \"METRICS_PATH\":\"$METRICS_PATH\"}" > ./src/envtest.json
+envsubst '${PREDICT_PATH} ${METRICS_PATH} ${CHECK_PREDICT_PATH} ${BACKEND_URL}' < nginx_setup_file.conf > /etc/nginx/nginx.conf

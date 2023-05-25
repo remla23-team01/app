@@ -2,18 +2,18 @@ const {VersionUtil} = require('@remla23-team01/lib')
 
 console.log(VersionUtil.getVersion())
 
-const env_vars = require('./env.json');
+const env_vars = require('./envtest.json');
 Object.keys(env_vars).forEach(function(k) {
     process.env[k] = env_vars[k];
 });
 
 window.addEventListener('load', function () {
-    console.log(process.env.MY_APP_URL);
+    console.log(process.env.PREDICT_PATH);
 
     document.getElementById('predictSentimentBtn').addEventListener('click', function () {
         const text = document.getElementById('predictSentimentText').value;
 
-        fetch(process.env.MY_APP_URL, {
+        fetch(process.env.PREDICT_PATH, {
             method: "POST",
             body: JSON.stringify({
                 msg: text,
@@ -37,7 +37,7 @@ function setSentimentCheckListeners(predicted_class) {
 }
 
 function sendSentimentCheck(predicted_class, correct) {
-    fetch(process.env.MY_APP_CHECK_PREDICTION, {
+    fetch(process.env.CHECK_PREDICT_PATH, {
         method: "POST",
         body: JSON.stringify({
             predicted_class: predicted_class,
