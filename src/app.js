@@ -1,12 +1,9 @@
-const {VersionUtil} = require('@remla23-team01/lib')
-
-console.log(VersionUtil.getVersion())
-
 const env_vars = require('./env.json');
+
 Object.keys(env_vars).forEach(function(k) {
     process.env[k] = env_vars[k];
 });
-
+const version = process.env.MY_APP_VERSION
 window.addEventListener('load', function () {
     console.log(process.env.MY_APP_URL);
     getAllReviews()
@@ -19,6 +16,7 @@ window.addEventListener('load', function () {
             method: "POST",
             body: JSON.stringify({
                 review: text,
+                version: version
             }),
             headers: {
                 "Content-type": "application/json"
@@ -56,7 +54,8 @@ function sendSentimentCheck(reviewId, correct) {
         method: "POST",
         body: JSON.stringify({
             reviewId: reviewId,
-            prediction_correct: correct
+            prediction_correct: correct,
+            version: version
         }),
         headers: {
             "Content-type": "application/json"
